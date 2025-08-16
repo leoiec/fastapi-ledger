@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Movimientos</h1>
+
+<form hx-post="/ui/entries" hx-target="#rows" hx-swap="beforeend">
+  <div class="grid">
+    <input type="date" name="date" required />
+    <input type="text" name="description" placeholder="Descripción" required />
+    <input type="number" step="0.01" name="amount" placeholder="Monto" required />
+    <select name="kind" required>
+      <option value="income">income</option>
+      <option value="expense">expense</option>
+    </select>
+    <button type="submit">Agregar</button>
+  </div>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th><th>Fecha</th><th>Descripción</th><th>Monto</th><th>Tipo</th>
+    </tr>
+  </thead>
+  <tbody id="rows">
+    {% include "rows.html" %}
+  </tbody>
+</table>
+{% endblock %}

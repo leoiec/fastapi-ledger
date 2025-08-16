@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.dist-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Entorno / IDE
+.venv/
+.env
+.vscode/
+.idea/
+
+# Base de datos local y builds
+ledger.db
+*.sqlite*
+dist/
+build/
+*.spec
