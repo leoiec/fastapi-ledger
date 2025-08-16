@@ -12,8 +12,8 @@ class EntryBase(BaseModel):
     @field_validator("kind")
     @classmethod
     def kind_must_be_valid(cls, v):
-        if v not in {"income", "expense"}:
-            raise ValueError("kind must be 'income' or 'expense'")
+        if v not in {"ingreso", "gasto"}:
+            raise ValueError("kind must be 'ingreso' or 'gasto'")
         return v
 
 class EntryCreate(EntryBase):

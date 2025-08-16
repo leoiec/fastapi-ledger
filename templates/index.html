@@ -2,19 +2,26 @@
 {% block content %}
 <h1>Movimientos</h1>
 
+<!-- Formulario -->
 <form hx-post="/ui/entries" hx-target="#rows" hx-swap="beforeend">
   <div class="grid">
     <input type="date" name="date" required />
     <input type="text" name="description" placeholder="Descripción" required />
     <input type="number" step="0.01" name="amount" placeholder="Monto" required />
     <select name="kind" required>
-      <option value="income">income</option>
-      <option value="expense">expense</option>
+      <option value="income">ingreso</option>
+      <option value="expense">gasto</option>
     </select>
     <button type="submit">Agregar</button>
   </div>
 </form>
 
+<!-- Resumen de saldos -->
+<section id="balance" style="margin-top:1rem;">
+  {% include "balance.html" %}
+</section>
+
+<!-- Tabla -->
 <table>
   <thead>
     <tr>

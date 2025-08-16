@@ -56,7 +56,12 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/", response_class=HTMLResponse)
 def ui_home(request: Request, db: Session = Depends(get_db)):
     rows = crud.list_entries(db, limit=100)
-    return templates.TemplateResponse("index.html", {"request": request, "rows": rows})
+    summary = crud.get_balance(db)  # <- income, expense, net
+    return templates.TemplateResponse("index.html", {
+        "request": request,
+        "rows": rows,
+        "summary": summary
+    })
 
 @app.get("/ui/rows", response_class=HTMLResponse)
 def ui_rows(request: Request, db: Session = Depends(get_db)):
@@ -76,5 +81,10 @@ def ui_create(
         date=date, description=description, amount=amount, kind=kind
     )
     obj = crud.create_entry(db, payload)
-    # Devolvemos una sola fila para insertar en la tabla
-    return templates.TemplateResponse("row.html", {"request": request, "row": obj})
+    summary = crud.get_balance(db)
+    # Devolvemos: <tr>... (para #rows) + <section id="balance" hx-swap-oob="true">...</section>
+    return templates.TemplateResponse("row_and_balance.html", {
+        "request": request,
+        "row": obj,
+        "summary": summary
+    })

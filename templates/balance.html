@@ -1,0 +1,17 @@
+{% set net_positive = summary.net >= 0 %}
+<article style="display:flex; gap:1rem; align-items:stretch; flex-wrap:wrap;">
+  <div style="flex:1; min-width:180px;">
+    <h5 style="margin-bottom:0.25rem;">Ingresos</h5>
+    <strong>${{ "{:,.2f}".format(summary.income) }}</strong>
+  </div>
+  <div style="flex:1; min-width:180px;">
+    <h5 style="margin-bottom:0.25rem;">Egresos</h5>
+    <strong>${{ "{:,.2f}".format(summary.expense) }}</strong>
+  </div>
+  <div style="flex:1; min-width:220px;">
+    <h5 style="margin-bottom:0.25rem;">Saldo total</h5>
+    <strong style="color: {{ 'green' if net_positive else 'crimson' }};">
+      ${{ "{:,.2f}".format(summary.net) }}
+    </strong>
+  </div>
+</article>
